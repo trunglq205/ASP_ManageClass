@@ -1,0 +1,81 @@
+﻿@model BTL_Nhom10_ASP.Models.Teacher
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<style>
+    dd {
+        color: black;
+    }
+
+    a {
+        color: blue;
+    }
+</style>
+<div class="row" style="margin-top: 50px">
+    <div class="col-lg-12">
+        <h1>Chi tiết giảng viên</h1>
+    </div>
+</div>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TeacherName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TeacherName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfBirth)
+        </dt>
+
+        <dd>
+            @Model.DateOfBirth.ToString("dd/MM/yyyy")
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Addres)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Addres)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Picture)
+        </dt>
+
+        <dd>
+            @{
+                string ImagePath = "";
+                if (Model.Picture.Length != 0)
+                {
+                    ImagePath = "~/wwwroot/images/teachers/" + Model.Picture;
+                }
+                else
+                {
+                    ImagePath = "~/wwwroot/images/macdinh.jpg";
+                }
+            }
+            <img src="@Url.Content(ImagePath)" style="width: 150px; height: 170px" class="img-thumbnail" />
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Sửa", "Edit", new { id = Model.TeacherID }) |
+    @Html.ActionLink("Trở về danh sách giảng viên", "Index")
+</p>

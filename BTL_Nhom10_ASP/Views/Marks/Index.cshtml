@@ -1,0 +1,59 @@
+﻿@model IEnumerable<BTL_Nhom10_ASP.Models.Assignment>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+    .m-table-container{
+        height: 500px;
+    }
+
+    .subject {
+        padding-top: 20px;
+    }
+
+        .subject h6 {
+            font-size: 15px;
+        }
+
+    .name_class p {
+        font-size: 15px;
+        font-weight: bold
+    }
+</style>
+<div class="row" style="margin-top: 50px">
+    <div class="col-lg-9">
+        <h1>Bảng điểm</h1>
+    </div>
+</div>
+<div style="padding-top: 30px;">
+    <h5>Mã lớp: @ViewBag.Class.ClassID</h5>
+    <h5>Tên lớp: @ViewBag.Class.ClassName</h5>
+</div>
+    <div>
+        <div class="m-table-container">
+            <table border="1" class="m-table">
+                <tr>
+                    <th>Mã môn học</th>
+                    <th>Tên môn học</th>
+                    <th>Điểm số</th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    foreach (var mark in ViewBag.Mark)
+                    {
+                        if (mark.AssigmentID == item.AssignmentID)
+                        {
+                            <tr>
+                                <td>@item.SubjectID</td>
+                                <td>@item.Subject.SubjectName</td>
+                                <td>@mark.Scores</td>
+                            </tr>
+                        }
+                    }
+
+                }
+            </table>
+        </div>
+    </div>

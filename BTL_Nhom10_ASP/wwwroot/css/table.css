@@ -1,0 +1,93 @@
+.m-table-container{
+    overflow-y: scroll;
+}
+.m-table-container table th{
+    position: sticky;
+    top: 0;
+}
+.m-table{
+    border-collapse: collapse;
+    width: 100%;
+}
+.m-table th{
+    background-color: #dd6464;
+}
+.m-table tr{
+    height: 48px;
+    border-bottom: 1px solid #bbb;
+}
+
+.m-table tr td{
+    padding: 0 16px;
+}
+
+.m-table tbody tr:nth-child(2n-1){
+    background-color: #c6c6c6;
+}
+
+table thead th{
+    text-align: left;
+    padding: 0 16px;
+}
+
+.m-table tbody tr:hover{
+    background-color: #EBF9F4;
+    cursor: pointer;
+}
+
+.m-table tbody tr.m-row-selected{
+    background-color: #EBF9F4;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+    color: black;
+}
+
+th {
+    padding: 5px;
+    text-align: center;
+}
+
+td {
+    padding: 10px;
+    text-align: center;
+    color: black;
+}
+
+a {
+    color: blue;
+    padding: 5px;
+}
+
+.top {
+    display: flex;
+}
+
+.icon_link {
+    font-size: 20px;
+}
+
+.page {
+    position: fixed;
+    right: 30px;
+    bottom: 10px;
+    color: black;
+}
+
+.pagination > li > a {
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    border: 1px solid #ddd;
+}
+
+.pagination > .active a {
+    background-color: #337ab7;
+    color: #fff;
+}
+
+.pagination li:hover {
+    background: yellow;
+}

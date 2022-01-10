@@ -1,0 +1,40 @@
+﻿@model PagedList.IPagedList<BTL_Nhom10_ASP.Models.Notification>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<style>
+    .m-table-container{
+        height: 500px;
+    }
+</style>
+<h1 style="margin-top: 50px">Danh sách thông báo</h1>
+
+<div style="margin-top: 30px">
+    <div class="m-table-container">
+        <table border="1" class="m-table">
+            <tr>
+                <th style="width: 150px; font-size: 18px">Mã thông báo</th>
+                <th style="font-size: 18px">Nội dung thông báo</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.NotificationID</td>
+                    <td>
+                        <h6 style="font-weight: bold">@item.NotificationName</h6>
+                        <p style="color: black">@item.NotificationContent</p>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+<br />
+<div class="page">
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page }))
+</div>

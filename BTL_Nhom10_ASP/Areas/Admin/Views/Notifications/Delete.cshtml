@@ -1,0 +1,60 @@
+﻿@model BTL_Nhom10_ASP.Models.Notification
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<style>
+    dd {
+        color: black;
+    }
+
+    a {
+        color: blue;
+    }
+</style>
+<div class="row" style="margin-top: 50px">
+    <div class="col-lg-12">
+        <h1>Xóa thông báo</h1>
+    </div>
+</div>
+
+<h4>Bạn có chắc chắn muốn xóa thông báo này không?</h4>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NotificationID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NotificationID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NotificationName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NotificationName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NotificationContent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NotificationContent)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+<div class="form-actions no-color">
+    <input type="submit" value="Xóa" class="btn btn-default" /> |
+    @Html.ActionLink("Trở lại danh sách thông báo", "Index")
+</div>
+    }
+</div>

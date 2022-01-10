@@ -1,0 +1,38 @@
+﻿@model BTL_Nhom10_ASP.Models.Subject
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<style>
+    dd {
+        color: black;
+    }
+
+    a {
+        color: blue;
+    }
+</style>
+<div class="row" style="margin-top: 50px">
+    <div class="col-lg-12">
+        <h1>Chi tiết môn học</h1>
+    </div>
+</div>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SubjectName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SubjectName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Sửa", "Edit", new { id = Model.SubjectID }) |
+    @Html.ActionLink("Trở về danh sách môn học", "Index")
+</p>

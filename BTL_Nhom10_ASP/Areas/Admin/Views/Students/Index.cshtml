@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+    .m-table-container{
+        height: 480px;
+    }
+</style>
+<div class="row" style="margin-top: 50px">
+    <div class="col-lg-9">
+        <h1>Danh sách học viên</h1>
+    </div>
+    <div class="col-lg-3">
+        <button type="button" class="btn btn-outline-success" data-toggle="modal"><a href="/Admin/Students/Create"> <i class="fa fa-plus-circle yellow_color"></i> Thêm mới</a></button>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+@using (Ajax.BeginForm("GetStudents", "Students", new AjaxOptions
+{
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "hocVienList",
+}))
+{
+<div style="padding-top: 20px;">
+    <input type="text" name="ten" />
+    <input type="submit" value="Tìm kiếm" style="cursor: pointer;" />
+</div>
+}
+
+@Html.Partial("ListStudentPartialView")

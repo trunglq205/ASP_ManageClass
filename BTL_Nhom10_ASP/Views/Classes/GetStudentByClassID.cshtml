@@ -1,0 +1,82 @@
+﻿@model PagedList.IPagedList<BTL_Nhom10_ASP.Models.Student>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "GetStudentByClassID";
+}
+
+<style>
+    .m-table-container{
+        height: 500px;
+    }
+</style>
+<div class="row" style="margin-top: 50px">
+    <div class="col-lg-9">
+        <h1>Danh sách học viên cùng lớp</h1>
+    </div>
+</div>
+<div style="margin-top: 30px">
+    <div class="m-table-container">
+        <table border="1" class="m-table">
+            <tr>
+                <th>
+                    Tên lớp
+                </th>
+                <th>
+                    Tên học viên
+                </th>
+                <th>
+                    Ngày sinh
+                </th>
+                <th>
+                    Địa chỉ
+                </th>
+                <th>
+                    Số điện thoại
+                </th>
+                <th>
+                    Ảnh
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Class.ClassName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StudentName)
+                    </td>
+                    <td>
+                        @item.DateOfBirth.ToString("dd/MM/yyyy")
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Phone)
+                    </td>
+                    <td>
+                        @{
+                            string ImagePath = "~/wwwroot/images/students/" + item.Picture;
+                        }
+                        <img src="@Url.Content(ImagePath)" style="width: 100px; height: 110px" class="img-thumbnail" />
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+    <div style="padding-top: 10px">
+        @Html.ActionLink("Trở về", "Index", "Classes")
+    </div>
+    <br />
+    <div class="page">
+        Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+
+        @Html.PagedListPager(Model, page => Url.Action("GetStudentByClassID",
+            new { page }))
+    </div>
+</div>
+

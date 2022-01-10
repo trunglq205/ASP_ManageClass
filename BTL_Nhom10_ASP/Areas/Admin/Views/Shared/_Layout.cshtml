@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <title>Pluto Center</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" href="~/wwwroot/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/wwwroot/style.css" />
+    <link rel="stylesheet" href="~/wwwroot/css/responsive.css" />
+    <link rel="stylesheet" href="~/wwwroot/css/custom.css" />
+    <link rel="stylesheet" href="~/wwwroot/css/table.css" />
+</head>
+<body class="dashboard dashboard_1">
+    <div class="full_container">
+        <div class="inner_container">
+            <nav id="sidebar">
+                <div class="sidebar_blog_1">
+                    <div class="sidebar_user_info">
+                        <div class="icon_setting"></div>
+                        <div class="user_profle_side">
+                            <div class="user_info">
+                                <h6>@Session["Name"]</h6>
+                                <p><span class="online_animation"></span> @Session["Position"]</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar_blog_2">
+                    <ul class="list-unstyled components">
+                        <li class="active">
+                            <a href="@Url.Action("Index","Home")"><i class="fa fa-dashboard orange_color"></i> <span>Dashboard</span></a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index","Notifications")"><i class="fa fa-bell red_color"></i> <span>Thông báo</span></a>
+                        </li>
+                        <li><a href="@Url.Action("Index","Classes")"><i class="fa fa-hourglass yellow_color"></i> <span>Danh sách lớp học</span></a></li>
+                        @if (Session["Position"].ToString() == "Quản lý")
+                        {
+                            <li>
+                                <a href="@Url.Action("Index","Teachers")"><i class="fa fa-user blue1_color"></i> <span>Danh sách giáo viên</span></a>
+                            </li>
+                        }
+                        <li>
+                            <a href="@Url.Action("Index","Students")"><i class="fa fa-graduation-cap green_color"></i> <span>Danh sách học viên</span></a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index","Subjects")"><i class="fa fa-book red_color"></i> <span>Danh sách môn học</span></a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index","Assignments")"><i class="fa fa-pencil-square-o yellow_color"></i> <span>Phân môn</span></a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index","TimeTables")"><i class="fa fa-calendar white_color"></i> <span>Xếp thời khóa biểu</span></a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index","Marks")"><i class="fa fa-table brown_color"></i> <span>Đánh giá học tập</span></a>
+                        </li>
+                        @if (Session["Position"].ToString() == "Quản lý")
+                        {
+                            <li>
+                                <a href="@Url.Action("Index","Users")"><i class="fa fa-key purple_color"></i> <span>Danh sách tài khoản</span></a>
+                            </li>
+                        }
+                        <li>
+                            <a href="@Url.Action("Logout","Home")"><i class="fa fa-sign-out red_color"></i> <span>Đăng xuất</span></a>
+                        </li>
+
+                    </ul>
+                </div>
+            </nav>
+            <div id="content">
+                <div class="topbar">
+                    <nav class="navbar navbar-expand-lg navbar-light">
+                        <div class="full">
+                            <button type="button" id="sidebarCollapse" class="sidebar_toggle"><i class="fa fa-bars"></i></button>
+                            <div class="logo_section">
+                                <a href="/Admin"><img class="img-responsive" src="~/wwwroot/images/logo.png" alt="#" /></a>
+                            </div>
+                            <div class="right_topbar">
+                                <div class="icon_info">
+                                    <ul>
+                                        <li><a href="#"><i class="fa fa-bell-o"></i><span class="badge">2</span></a></li>
+                                        <li><a href="#"><i class="fa fa-question-circle"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-envelope-o"></i><span class="badge">3</span></a></li>
+                                    </ul>
+                                    <ul class="user_profile_dd">
+                                        <li>
+                                            <a class="dropdown-toggle" data-toggle="dropdown"><span class="name_user">@Session["Name"]</span></a>
+                                            <div class="dropdown-menu">
+                                                <p class="dropdown-item">Chức vụ: @Session["Position"]</p>
+                                                <a class="dropdown-item" href="@Url.Action("Logout","Home")"><span>Đăng xuất</span> <i class="fa fa-sign-out"></i></a>
+
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    <script src="~/wwwroot/js/jquery.min.js"></script>
+    <script src="~/wwwroot/js/bootstrap.min.js"></script>
+    <script src="~/wwwroot/js/custom.js"></script>
+</body>
+</html>
+

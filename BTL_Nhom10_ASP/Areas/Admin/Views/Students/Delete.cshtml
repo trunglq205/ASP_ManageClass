@@ -1,0 +1,95 @@
+﻿@model BTL_Nhom10_ASP.Models.Student
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<style>
+    dd {
+        color: black;
+    }
+
+    a {
+        color: blue;
+    }
+</style>
+<div class="row" style="margin-top: 50px">
+    <div class="col-lg-12">
+        <h1>Xóa học viên</h1>
+    </div>
+</div>
+
+<h4>Bạn có chắc chắn muốn xóa học viên này không?</h4>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Class.ClassName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Class.ClassName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.StudentName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StudentName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfBirth)
+        </dt>
+
+        <dd>
+            @Model.DateOfBirth.ToString("dd/MM/yyyy")
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Picture)
+        </dt>
+
+        <dd>
+            @{
+                string ImagePath = "";
+                if (Model.Picture.Length != 0)
+                {
+                    ImagePath = "~/wwwroot/images/students/" + Model.Picture;
+                }
+                else
+                {
+                    ImagePath = "~/wwwroot/images/macdinh.jpg";
+                }
+            }
+            <img src="@Url.Content(ImagePath)" style="width: 150px; height: 170px" class="img-thumbnail" />
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-default" /> |
+            @Html.ActionLink("Trở về danh sách học viên", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,86 @@
+﻿@model PagedList.IPagedList<BTL_Nhom10_ASP.Models.Student>
+@using PagedList.Mvc;
+
+<div id="hocVienList" style="margin-top: 10px">
+    <div class="m-table-container">
+        <table border="1" class="m-table">
+            <tr>
+                <th>
+                    Mã học viên
+                </th>
+                <th>
+                    Tên lớp
+                </th>
+                <th>
+                    Tên học viên
+                </th>
+                <th>
+                    Ngày sinh
+                </th>
+                <th>
+                    Địa chỉ
+                </th>
+                <th>
+                    Số điện thoại
+                </th>
+                <th>
+                    Ảnh
+                </th>
+                <th>Tùy chọn</th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StudentID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Class.ClassName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StudentName)
+                    </td>
+                    <td>
+                        @item.DateOfBirth.ToString("dd/MM/yyyy")
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Phone)
+                    </td>
+                    <td>
+                        @{
+                            string ImagePath = "";
+                            if (item.Picture.Length != 0)
+                            {
+                                ImagePath = "~/wwwroot/images/students/" + item.Picture;
+                            }
+                            else
+                            {
+                                ImagePath = "~/wwwroot/images/macdinh.jpg";
+                            }
+                        }
+                        <img src="@Url.Content(ImagePath)" style="width: 100px; height: 110px" class="img-thumbnail" />
+
+                    </td>
+                    <td>
+                        <a href="/Admin/Students/Edit/@item.StudentID"> <i class="fa fa-wrench blue1_color icon_link"></i></a> |
+                        <a href="/Admin/Students/Details/@item.StudentID"> <i class="fa fa-info-circle green_color icon_link"></i> </a> |
+                        <a href="/Admin/Students/Delete/@item.StudentID"> <i class="fa fa-trash-o red_color icon_link"></i></a>
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+
+    <br />
+    <div class="page">
+        Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+
+        @Html.PagedListPager(Model, page => Url.Action("Index",
+            new { page }))
+    </div>
+</div>

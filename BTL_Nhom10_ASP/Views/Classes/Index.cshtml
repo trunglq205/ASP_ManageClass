@@ -1,0 +1,49 @@
+﻿@model BTL_Nhom10_ASP.Models.Class
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+    .sp1 {
+        font-size: 20px;
+        color: black;
+        padding-top: 50px;
+    }
+
+    .info h1 {
+        color: darkmagenta;
+        padding-left: 150px;
+    }
+</style>
+
+<h1 style="padding-top: 50px">Thông tin lớp học</h1>
+
+<hr />
+<div class="row">
+    <div class="col-6 info">
+        <i class="fa fa-hand-o-right orange_color"></i> <span class="sp1">Mã lớp: </span>
+        <h1><i>@Model.ClassID</i></h1>
+        <i class="fa fa-hand-o-right orange_color"></i> <span class="sp1">Tên lớp: </span>
+        <h1><i>@Model.ClassName</i></h1>
+        <i class="fa fa-hand-o-right orange_color"></i> <span class="sp1">Giảng viên: </span>
+        <h1><i>@Model.Teacher.TeacherName</i></h1>
+    </div>
+    <div class="col-6">
+        <i class="fa fa-hand-o-right orange_color"></i> 
+        <span class="sp1">Danh sách môn học: </span>
+        <div>
+             @foreach (var item in ViewBag.Subject)
+              {
+                  <ul>
+                       <li>
+                           <h6 style="font-size: 15px; color: chocolate; padding-top: 15px"><i>- @item.SubjectName</i></h6>
+                        </li>
+                   </ul>
+              }
+        </div>                                               
+    </div>
+</div>
+<div>
+    <i style="padding-top: 100px;" class="fa fa-hand-o-right orange_color"></i><i class="fa fa-hand-o-right orange_color"></i>
+    <span class="sp1"><a href="/Classes/GetStudentByClassID/@Model.ClassID" style="color: blue">Xem thành viên trong lớp học</a></span>
+</div>

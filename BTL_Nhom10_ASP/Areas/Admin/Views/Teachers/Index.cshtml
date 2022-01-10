@@ -1,0 +1,95 @@
+﻿@model PagedList.IPagedList<BTL_Nhom10_ASP.Models.Teacher>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+    .m-table-container{
+        height: 500px;
+    }
+</style>
+<div class="row" style="margin-top: 50px">
+    <div class="col-lg-9">
+        <h1>Danh sách giảng viên</h1>
+    </div>
+    <div class="col-lg-3">
+        <button type="button" class="btn btn-outline-success" data-toggle="modal"><a href="/Admin/Teachers/Create"> <i class="fa fa-plus-circle yellow_color"></i> Thêm mới</a></button>
+    </div>
+</div>
+<div style="margin-top: 30px">
+    <div class="m-table-container">
+        <table border="1" class="m-table">
+            <tr>
+                <th>
+                    Mã giảng viên
+                </th>
+                <th>
+                    Tên giảng viên
+                </th>
+                <th>
+                    Ngày sinh
+                </th>
+                <th>
+                    Địa chỉ
+                </th>
+                <th>
+                    Số điện thoại
+                </th>
+                <th>
+                    Ảnh
+                </th>
+                <th>Tùy chọn</th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TeacherID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TeacherName)
+                    </td>
+                    <td>
+                        @item.DateOfBirth.ToString("dd/MM/yyyy")
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Addres)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Phone)
+                    </td>
+                    <td>
+                        @{
+                            string ImagePath = "";
+                            if (item.Picture.Length != 0)
+                            {
+                                ImagePath = "~/wwwroot/images/teachers/" + item.Picture;
+                            }
+                            else
+                            {
+                                ImagePath = "~/wwwroot/images/macdinh.jpg";
+                            }
+                        }
+                        <img src="@Url.Content(ImagePath)" style="width: 100px; height: 110px" class="img-thumbnail" />
+                    </td>
+                    <td>
+                        <a href="/Admin/Teachers/Edit/@item.TeacherID"> <i class="fa fa-wrench blue1_color icon_link"></i></a> |
+                        <a href="/Admin/Teachers/Details/@item.TeacherID"> <i class="fa fa-info-circle green_color icon_link"></i> </a> |
+                        <a href="/Admin/Teachers/Delete/@item.TeacherID"> <i class="fa fa-trash-o red_color icon_link"></i></a>
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
+<br />
+<div class="page">
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page }))
+</div>

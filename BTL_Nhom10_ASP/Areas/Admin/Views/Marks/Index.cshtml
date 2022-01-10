@@ -1,0 +1,95 @@
+﻿@model PagedList.IPagedList<BTL_Nhom10_ASP.Models.Class>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+    .m-table-container{
+        height: 450px;
+    }
+
+    .subject {
+        padding-top: 20px;
+    }
+    .subject h6 {
+        font-size: 15px;
+    }
+    .name_class p {
+        font-size: 15px;
+        font-weight: bold
+    }
+    .page{
+        position: unset;
+    }
+</style>
+<div class="row" style="margin-top: 50px">
+    <div class="col-lg-9">
+        <h1>Bảng điểm</h1>
+    </div>
+</div>
+@foreach (var it in Model)
+{
+    <div style="padding-top: 40px" class="col-lg-9 name_class">
+        <p>Mã lớp: @it.ClassID</p>
+        <p>Tên lớp: @it.ClassName</p>
+    </div>
+    foreach (var am in ViewBag.Assignment)
+    {
+        if (am.ClassID == it.ClassID)
+        {
+            <div class="subject">
+                <h6>Mã môn: @am.SubjectID</h6>
+                <h6>Tên môn: @am.Subject.SubjectName</h6>
+            </div>
+            <div class="m-table-container">
+                <table border="1" class="m-table">
+                    <tr>
+                        <th>
+                            Mã học viên
+                        </th>
+
+                        <th>
+                            Tên học viên
+                        </th>
+                        <th>
+                            Điểm số
+                        </th>
+                        <th>Tùy chọn</th>
+                    </tr>
+
+                    @foreach (var item in ViewBag.Marks)
+                    {
+                        if (item.Assignment.ClassID == am.ClassID && item.Assignment.SubjectID == am.SubjectID)
+                        {
+                            <tr>
+                                <td>
+                                    @item.Student.StudentID
+                                </td>
+                                <td>
+                                    @item.Student.StudentName
+                                </td>
+                                <td>
+                                    @item.Scores
+                                </td>
+                                <td>
+                                    <a href="/Admin/Marks/Edit/@item.MarkID"> <i class="fa fa-wrench blue1_color icon_link"></i></a>
+
+                                </td>
+                            </tr>
+                        }
+                    }
+
+                </table>
+            </div>
+        }
+    }
+}
+<br />
+<div class="page">
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page }))
+</div>

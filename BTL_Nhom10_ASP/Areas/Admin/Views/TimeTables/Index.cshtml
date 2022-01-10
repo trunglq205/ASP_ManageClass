@@ -1,0 +1,72 @@
+﻿@model PagedList.IPagedList<BTL_Nhom10_ASP.Models.TimeTable>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+    .m-table-container{
+        height: 500px;
+    }
+</style>
+<div class="row" style="margin-top: 50px">
+    <div class="col-lg-9">
+        <h1>Thời khóa biểu</h1>
+    </div>
+    <div class="col-lg-3">
+        <button type="button" class="btn btn-outline-success" data-toggle="modal"><a href="/Admin/TimeTables/Create"> <i class="fa fa-plus-circle yellow_color"></i> Thêm mới</a></button>
+    </div>
+</div>
+<div style="margin-top: 30px">
+    <div class="m-table-container">
+        <table border="1" class="m-table">
+            <tr>
+                <th>
+                    Mã TKB
+                </th>
+                <th>
+                    Mã lớp
+                </th>
+                <th>
+                    Tên lớp
+                </th>
+                <th>
+                    Lịch học
+                </th>
+                <th>Tùy chọn</th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TimeTableID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Class.ClassID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Class.ClassName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Schedule)
+                    </td>
+                    <td>
+                        <a href="/Admin/TimeTables/Edit/@item.TimeTableID"> <i class="fa fa-wrench blue1_color icon_link"></i></a> |
+                        <a href="/Admin/TimeTables/Details/@item.TimeTableID"> <i class="fa fa-info-circle green_color icon_link"></i> </a> |
+                        <a href="/Admin/TimeTables/Delete/@item.TimeTableID"> <i class="fa fa-trash-o red_color icon_link"></i></a>
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
+<br />
+<div class="page">
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page }))
+</div>

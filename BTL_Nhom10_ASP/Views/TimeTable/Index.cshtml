@@ -1,0 +1,75 @@
+﻿@model IEnumerable<BTL_Nhom10_ASP.Models.TimeTable>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        color: black;
+    }
+
+    th {
+        padding: 5px;
+        text-align: center;
+    }
+
+    td {
+        padding: 10px;
+        text-align: center;
+        color: black;
+    }
+
+    a {
+        color: blue;
+        padding: 5px;
+    }
+
+    .top {
+        display: flex;
+    }
+
+    .icon_link {
+        font-size: 20px;
+    }
+</style>
+<div class="row" style="margin-top: 50px">
+    <div class="col-lg-9">
+        <h1>Thời khóa biểu</h1>
+    </div>
+</div>
+<div style="margin-top: 30px">
+    <div class="m-table-container">
+        <table border="1" class="m-table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Class.ClassID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Class.ClassName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Schedule)
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Class.ClassID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Class.ClassName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Schedule)
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>

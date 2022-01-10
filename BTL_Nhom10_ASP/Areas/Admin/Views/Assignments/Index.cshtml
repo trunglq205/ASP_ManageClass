@@ -1,0 +1,73 @@
+﻿@model PagedList.IPagedList<BTL_Nhom10_ASP.Models.Class>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+    .m-table-container{
+        height: 430px;
+    }
+    p{
+        font-size: 16px;
+        color: black;
+        font-weight: bolder;
+    }
+</style>
+<div class="row" style="margin-top: 50px">
+    <div class="col-lg-9">
+        <h1>Danh sách môn học theo lớp</h1>
+    </div>
+    <div class="col-lg-3">
+        <button type="button" class="btn btn-outline-success" data-toggle="modal"><a href="/Admin/Assignments/Create"> <i class="fa fa-plus-circle yellow_color"></i> Thêm mới</a></button>
+    </div>
+</div>
+
+@foreach (var it in Model)
+{
+    <div style="padding-top: 40px" class="col-lg-9 name_class">
+        <p>Mã lớp: @it.ClassID</p>
+        <p>Tên lớp: @it.ClassName</p>
+    </div>
+    <div style="padding-bottom: 40px">
+        <div class="m-table-container">
+            <table border="1" class="m-table">
+                <tr>
+                    <th>
+                        Mã môn học
+                    </th>
+                    <th>
+                        Tên môn học
+                    </th>
+                    <th style="width: 30%">Tùy chọn</th>
+                </tr>
+
+                @foreach (var item in ViewBag.Assignments)
+                {
+                    if (item.ClassID == @it.ClassID)
+                    {
+                        <tr>
+                            <td>
+                                @item.Subject.SubjectID
+                            </td>
+                            <td>
+                                @item.Subject.SubjectName
+                            </td>
+                            <td>
+                                <a href="/Admin/Assignments/Edit/@item.AssignmentID"> <i class="fa fa-wrench blue1_color icon_link"></i></a> |
+                                <a href="/Admin/Assignments/Details/@item.AssignmentID"> <i class="fa fa-info-circle green_color icon_link"></i> </a> |
+                                <a href="/Admin/Assignments/Delete/@item.AssignmentID"> <i class="fa fa-trash-o red_color icon_link"></i></a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </table>
+        </div>
+    </div>
+}
+<div class="page">
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page }))
+</div>

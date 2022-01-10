@@ -1,0 +1,63 @@
+﻿@model BTL_Nhom10_ASP.Models.Student
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+    label{
+        color: black;
+        font-size: 20px;
+        width: 150px;
+    }
+    .info span{
+        font-size: 30px;
+        color: blueviolet;
+        font-style: italic;
+        padding-top: 30px;
+    }
+</style>
+<h1 style="padding-top: 50px">Thông tin cá nhân</h1>
+
+<div style="padding-top: 30px">
+    <div class="row">
+        <div class="col-4">
+            <label>Ảnh đại diện: </label>
+            <div>
+                @{
+                    string ImagePath = "";
+                    if (Model.Picture.Length != 0)
+                    {
+                        ImagePath = "~/wwwroot/images/students/" + Model.Picture;
+                    }
+                    else
+                    {
+                        ImagePath = "~/wwwroot/images/macdinh.jpg";
+                    }
+                }
+                <img src="@Url.Content(ImagePath)" style="width: 300px; height: 350px" class="img-thumbnail" />
+            </div>
+        </div>
+        <div class="col-8 info" style="padding-left: 100px;">
+            <label>Mã học viên: </label>
+            <span>@Model.StudentID</span>
+            <br />
+            <label>Họ tên: </label>
+            <span>@Model.StudentName</span>
+            <br />
+            <label>Ngày sinh: </label>
+            <span>@Model.DateOfBirth.ToShortDateString()</span>
+            <br />
+            <label>Địa chỉ: </label>
+            <span>@Model.Address</span>
+            <br />
+            <label>Số điện thoại: </label>
+            <span>@Model.Phone</span>
+        </div>
+    </div>
+
+    <div style="padding-top: 80px">
+        <a href="/Students/Edit/@Model.StudentID"><h4>Cập nhật</h4></a>
+    </div>
+</div>
+
